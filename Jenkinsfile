@@ -23,7 +23,7 @@ pipeline {
                 sh 'docker build -t cnoc:v1 .'
 
                 // docker run 
-                sh 'docker run -d -p 9090:80 --name=cnoc cnoc:v1'
+                sh 'docker run -d -p 80:80 --name=cnoc cnoc:v1'
             }
         }
     }
