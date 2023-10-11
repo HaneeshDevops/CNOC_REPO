@@ -5,7 +5,7 @@ pipeline {
     stage('Build') {
       steps {
         // Checkout your source code from GitHub
-        git 'https://github.com/HaneeshDevops/SpringBootEcommerceApplication.git'
+        git 'https://github.com/HaneeshDevops/CNOC_REPO.git'
 
       }
     }
