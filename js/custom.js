@@ -5,15 +5,18 @@ function getYear() {
   document.querySelector("#displayYear").innerHTML = currentYear;
 }
 
+// Call the getYear function to display the current year
 getYear();
 
 // Function to handle user login
 document.getElementById('loginForm').addEventListener('submit', function(event) {
   event.preventDefault();
 
+  // Get the email and password from the form
   const email = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
+  // Sign in the user with Firebase authentication
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       var user = userCredential.user;
@@ -28,7 +31,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     });
 });
 
-// Client section owl carousel
+// Initialize Owl Carousel for client section
 $(".client_owl-carousel").owlCarousel({
   loop: true,
   margin: 20,
