@@ -1,3 +1,30 @@
+// Function to handle user login
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  // Get the email and password from the form
+  const email = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  // Sign in the user with Firebase authentication
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      var user = userCredential.user;
+      console.log('User signed in:', user);
+
+      // Show success message for login
+      document.getElementById('loginSuccessMessage').style.display = 'block';
+
+      // Add code for successful login (e.g., redirect or show success message)
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.error('Error:', errorCode, errorMessage);
+      // Add code to handle errors (e.g., show error message to user)
+    });
+});
+
 // Function to handle user registration
 document.getElementById('signupForm').addEventListener('submit', function(event) {
   event.preventDefault();
@@ -22,6 +49,9 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
         console.error('Error updating user profile:', error);
       });
 
+      // Show success message for signup
+      document.getElementById('signupSuccessMessage').style.display = 'block';
+
       // Add code for successful registration (e.g., redirect or show success message)
     })
     .catch((error) => {
@@ -31,6 +61,7 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
       // Add code to handle errors (e.g., show error message to user)
     });
 });
+
 
 
 // Initialize Owl Carousel for client section
