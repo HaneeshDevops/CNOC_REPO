@@ -1,27 +1,28 @@
-// Function to get current year
-function getYear() {
-  var currentDate = new Date();
-  var currentYear = currentDate.getFullYear();
-  document.querySelector("#displayYear").innerHTML = currentYear;
-}
-
-// Call the getYear function to display the current year
-getYear();
-
-// Function to handle user login
-document.getElementById('loginForm').addEventListener('submit', function(event) {
+// Function to handle user registration
+document.getElementById('signupForm').addEventListener('submit', function(event) {
   event.preventDefault();
 
-  // Get the email and password from the form
-  const email = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+  // Get the email, password, and username from the form
+  const email = document.getElementById('newEmail').value;
+  const password = document.getElementById('newPassword').value;
+  const username = document.getElementById('newUsername').value;
 
-  // Sign in the user with Firebase authentication
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  // Create a new user with Firebase authentication
+  firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       var user = userCredential.user;
-      console.log('User signed in:', user);
-      // Add code for successful login (e.g., redirect or show success message)
+      console.log('User registered:', user);
+
+      // Optionally, you can update the user's profile with their username
+      user.updateProfile({
+        displayName: username
+      }).then(function() {
+        console.log('User profile updated with username');
+      }).catch(function(error) {
+        console.error('Error updating user profile:', error);
+      });
+
+      // Add code for successful registration (e.g., redirect or show success message)
     })
     .catch((error) => {
       var errorCode = error.code;
@@ -30,6 +31,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
       // Add code to handle errors (e.g., show error message to user)
     });
 });
+
 
 // Initialize Owl Carousel for client section
 $(".client_owl-carousel").owlCarousel({
